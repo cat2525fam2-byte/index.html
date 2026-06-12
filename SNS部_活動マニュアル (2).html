@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SNS部 活動マニュアル</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Noto Sans JP', sans-serif; background: #f7f8fa; color: #1a1a1a; }
+
+.nav-bar {
+  position: sticky; top: 0;
+  background: #fff;
+  border-bottom: 1px solid #e0e4ea;
+  padding: 10px 20px;
+  display: flex; gap: 6px; flex-wrap: wrap; z-index: 100;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+.nav-btn {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 12px; padding: 5px 12px;
+  border-radius: 20px;
+  border: 1px solid #cdd3dc;
+  background: transparent; color: #555;
+  cursor: pointer; white-space: nowrap; transition: all 0.15s;
+}
+.nav-btn:hover { background: #f0f3f8; color: #1a1a1a; }
+.nav-btn.active { background: #1B3F72; color: #fff; border-color: #1B3F72; }
+
+.container { max-width: 780px; margin: 0 auto; padding: 0 20px; }
+
+.page { display: none; padding: 28px 0 60px; }
+.page.active { display: block; }
+
+.title-block { text-align: center; padding: 32px 0 24px; }
+.title-block h1 { font-size: 28px; font-weight: 700; color: #1B3F72; margin-bottom: 8px; letter-spacing: -0.5px; }
+.title-block p { font-size: 14px; color: #666; }
+
+.section-head {
+  font-size: 18px; font-weight: 700;
+  color: #1a1a1a;
+  border-bottom: 2px solid #2E75B6;
+  padding-bottom: 8px; margin: 28px 0 16px;
+}
+.section-head.green { border-color: #375623; }
+.section-head.red { border-color: #C00000; }
+.section-head.sm { font-size: 15px; border-bottom-width: 1px; margin-top: 20px; }
+
+.body-text { font-size: 14px; color: #444; line-height: 1.85; margin-bottom: 14px; }
+
+.warn-box {
+  background: #FFF0EE; border-left: 4px solid #C00000;
+  border-radius: 0 6px 6px 0;
+  padding: 12px 16px; font-size: 13px; color: #7a0000;
+  margin: 14px 0; line-height: 1.75;
+}
+.info-box {
+  background: #EBF3FB; border-left: 4px solid #2E75B6;
+  border-radius: 0 6px 6px 0;
+  padding: 12px 16px; font-size: 13px; color: #0d3d6e;
+  margin: 14px 0; line-height: 1.75;
+}
+.yellow-box {
+  background: #FFF8DC; border-radius: 8px;
+  padding: 14px 18px; margin: 16px 0;
+  font-size: 14px; font-weight: 700; color: #5c3d00;
+  text-align: center; line-height: 1.7;
+}
+.yellow-box small { display: block; font-size: 12px; font-weight: 400; color: #7a5200; margin-top: 4px; }
+
+.compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
+@media (max-width: 520px) { .compare-grid { grid-template-columns: 1fr; } }
+.compare-card {
+  background: #fff; border: 1px solid #e0e4ea;
+  border-radius: 10px; padding: 16px;
+}
+.compare-card.blue-accent { border-top: 4px solid #2E75B6; }
+.compare-card.red-accent { border-top: 4px solid #C00000; }
+.compare-card h3 { font-size: 14px; font-weight: 700; color: #1a1a1a; margin-bottom: 12px; }
+.compare-row { display: flex; gap: 10px; margin-bottom: 9px; align-items: flex-start; }
+.compare-label { font-size: 11px; color: #888; background: #f0f3f8; border-radius: 4px; padding: 2px 6px; white-space: nowrap; flex-shrink: 0; margin-top: 2px; }
+.compare-val { font-size: 13px; color: #333; line-height: 1.6; }
+
+table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 10px 0; border-radius: 8px; overflow: hidden; border: 1px solid #e0e4ea; }
+thead th {
+  background: #2E75B6; color: #fff;
+  font-weight: 700; padding: 10px 12px; text-align: left; font-size: 12px;
+}
+thead th.green { background: #375623; }
+thead th.red { background: #C00000; }
+thead th.navy { background: #1B3F72; }
+tbody td { padding: 9px 12px; border-bottom: 1px solid #eef0f4; color: #333; vertical-align: middle; line-height: 1.65; }
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:nth-child(even) td { background: #f8f9fb; }
+tbody td strong { font-weight: 700; }
+
+.badge { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 20px; white-space: nowrap; }
+.badge.ok { background: #EAF3DE; color: #27500A; }
+.badge.ng { background: #FCEBEB; color: #791F1F; }
+.badge.warn { background: #FAEEDA; color: #633806; }
+
+.step-flow { margin: 16px 0; }
+.step-item { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 10px; }
+.step-num {
+  width: 30px; height: 30px; border-radius: 50%;
+  background: #2E75B6; color: #fff;
+  font-size: 13px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px;
+}
+.step-title { font-size: 14px; font-weight: 700; color: #1a1a1a; margin-bottom: 3px; }
+.step-desc { font-size: 12px; color: #666; line-height: 1.55; }
+
+.flow-box {
+  background: #fff; border: 1px solid #cdd3dc;
+  border-radius: 8px; padding: 12px 16px;
+  margin-bottom: 8px; display: flex; align-items: center;
+  gap: 12px; cursor: pointer; transition: background 0.12s;
+}
+.flow-box:hover { background: #f0f5fb; }
+.flow-box-label { font-size: 13px; font-weight: 700; color: #1a1a1a; }
+.flow-box-desc { font-size: 12px; color: #666; margin-top: 2px; }
+.flow-box.red-box { border-color: #e8a0a0; background: #fff5f5; }
+.flow-box.red-box .flow-box-label { color: #7a0000; }
+.flow-box.red-box .flow-box-desc { color: #a33; }
+
+.arrow-icon { font-size: 18px; flex-shrink: 0; }
+
+.pill-list { display: flex; flex-wrap: wrap; gap: 7px; margin: 12px 0; }
+.pill { background: #f0f3f8; border: 1px solid #dde2ea; border-radius: 20px; padding: 5px 13px; font-size: 13px; color: #555; }
+.pill.ok { background: #EAF3DE; border-color: #b8d98a; color: #27500A; }
+.pill.ng { background: #FCEBEB; border-color: #f0aaaa; color: #791F1F; }
+
+.status-label { font-size: 13px; font-weight: 700; border-radius: 6px; padding: 9px 14px; margin: 14px 0 10px; }
+.status-label.ok-label { color: #27500A; background: #EAF3DE; }
+.status-label.ng-label { color: #791F1F; background: #FCEBEB; }
+
+.hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
+@media (max-width: 480px) { .hero-grid { grid-template-columns: 1fr; } }
+.hero-btn {
+  border: none; border-radius: 10px; padding: 20px 16px;
+  font-size: 14px; font-weight: 700; cursor: pointer;
+  text-align: left; line-height: 1.65;
+  font-family: 'Noto Sans JP', sans-serif;
+  transition: opacity 0.15s;
+}
+.hero-btn:hover { opacity: 0.88; }
+.hero-btn .icon { font-size: 22px; display: block; margin-bottom: 10px; opacity: 0.85; }
+
+.jump-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; }
+@media (max-width: 480px) { .jump-grid { grid-template-columns: 1fr; } }
+.jump-btn {
+  font-family: 'Noto Sans JP', sans-serif;
+  text-align: left; padding: 11px 14px; font-size: 13px;
+  border-radius: 8px; border: 1px solid #cdd3dc;
+  background: #fff; color: #444; cursor: pointer; transition: all 0.12s;
+}
+.jump-btn:hover { background: #f0f3f8; border-color: #b0b8c8; color: #1a1a1a; }
+
+.bottom-nav {
+  display: flex; justify-content: space-between;
+  margin-top: 36px; padding-top: 18px;
+  border-top: 1px solid #e8eaee;
+}
+.nav-arrow {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 13px; padding: 8px 16px;
+  border-radius: 8px; border: 1px solid #cdd3dc;
+  background: #fff; color: #555; cursor: pointer; transition: all 0.12s;
+}
+.nav-arrow:hover { background: #f0f3f8; color: #1a1a1a; }
+</style>
+</head>
+<body>
+
+<div class="nav-bar" id="navBar">
+  <button class="nav-btn active" onclick="goTo(0)">スタート</button>
+  <button class="nav-btn" onclick="goTo(1)">違いを知る</button>
+  <button class="nav-btn" onclick="goTo(2)">クイックガイド</button>
+  <button class="nav-btn" onclick="goTo(3)">第1章 SNSの役割</button>
+  <button class="nav-btn" onclick="goTo(4)">第2章 政治活動期間</button>
+  <button class="nav-btn" onclick="goTo(5)">第3章 選挙運動期間</button>
+  <button class="nav-btn" onclick="goTo(6)">第4章 炎上対策</button>
+  <button class="nav-btn" onclick="goTo(7)">第5章 各SNSの使い方</button>
+  <button class="nav-btn" onclick="goTo(8)">第6章 コンテンツ注意点</button>
+  <button class="nav-btn" onclick="goTo(9)">第7章 投稿フロー</button>
+  <button class="nav-btn" onclick="goTo(10)">第8章 まとめ</button>
+</div>
+
+<!-- PAGE 0 -->
+<div class="page active" id="page-0">
+<div class="container">
+  <div class="title-block">
+    <h1>SNS部 活動マニュアル</h1>
+    <p>投稿・画像・動画作成の注意点と守るべきルール</p>
+  </div>
+  <div class="warn-box"><strong>重要：</strong>選挙違反は候補者だけでなく、支援者（SNS部員）も罰則の対象です。「知らなかった」では済みません。迷ったら必ず県連SNS本部長に確認してください。</div>
+  <p class="section-head">このマニュアルの使い方</p>
+  <p class="body-text">上のボタン、または下のボタンを押すと、知りたい内容のページにすぐ移動できます。まず「違いを知る」か「クイックガイド」から始めるのがおすすめです。</p>
+  <div class="hero-grid">
+    <button class="hero-btn" onclick="goTo(1)" style="background:#1B3F72;color:#fff;">
+      <span class="icon">📖</span>政治活動と選挙活動の違いを知る
+    </button>
+    <button class="hero-btn" onclick="goTo(2)" style="background:#2E75B6;color:#fff;">
+      <span class="icon">✅</span>期間別クイックガイドを見る
+    </button>
+  </div>
+  <p class="section-head">各章へジャンプ</p>
+  <div class="jump-grid">
+    <button class="jump-btn" onclick="goTo(3)">📱 第1章 SNSの役割</button>
+    <button class="jump-btn" onclick="goTo(4)">📅 第2章 政治活動期間</button>
+    <button class="jump-btn" onclick="goTo(5)">🚩 第3章 選挙運動期間</button>
+    <button class="jump-btn" onclick="goTo(6)">🔥 第4章 炎上対策</button>
+    <button class="jump-btn" onclick="goTo(7)">💬 第5章 各SNSの使い方</button>
+    <button class="jump-btn" onclick="goTo(8)">🖼 第6章 コンテンツ注意点</button>
+    <button class="jump-btn" onclick="goTo(9)">🔀 第7章 投稿フロー</button>
+    <button class="jump-btn" onclick="goTo(10)">⭐ 第8章 まとめ</button>
+  </div>
+  <div class="bottom-nav"><span></span><button class="nav-arrow" onclick="goTo(1)">次へ：違いを知る →</button></div>
+</div>
+</div>
+
+<!-- PAGE 1 -->
+<div class="page" id="page-1">
+<div class="container">
+  <p class="section-head">政治活動と選挙活動（選挙運動）の違い</p>
+  <p class="body-text">SNSの投稿がOKかNGかは「今がどちらの期間か」によって変わります。まずここを確認しましょう。</p>
+  <div class="compare-grid">
+    <div class="compare-card blue-accent">
+      <h3>🗓 政治活動</h3>
+      <div class="compare-row"><span class="compare-label">期間</span><span class="compare-val">いつでも（告示日の前が中心）</span></div>
+      <div class="compare-row"><span class="compare-label">目的</span><span class="compare-val">候補者の考えや政策を広める・知名度を上げる</span></div>
+      <div class="compare-row"><span class="compare-label">SNSの制限</span><span class="compare-val">原則として自由（直接の投票依頼はNG）</span></div>
+      <div class="compare-row"><span class="compare-label">例</span><span class="compare-val">活動報告・政策紹介・演説の様子を投稿する</span></div>
+    </div>
+    <div class="compare-card red-accent">
+      <h3>🚩 選挙活動（選挙運動）</h3>
+      <div class="compare-row"><span class="compare-label">期間</span><span class="compare-val">告示日〜投票日の前日まで</span></div>
+      <div class="compare-row"><span class="compare-label">目的</span><span class="compare-val">「○○に投票してください」と直接お願いする</span></div>
+      <div class="compare-row"><span class="compare-label">SNSの制限</span><span class="compare-val">SNS・HP・動画は自由。メール送信・有料広告はNG</span></div>
+      <div class="compare-row"><span class="compare-label">例</span><span class="compare-val">「ぜひ一票を！」と呼びかける投稿をする</span></div>
+    </div>
+  </div>
+  <p class="section-head">重要な用語</p>
+  <table>
+    <thead><tr><th>用語</th><th>意味</th></tr></thead>
+    <tbody>
+      <tr><td><strong>告示日</strong></td><td>選挙がオフィシャルにスタートする日。この日から選挙ポスターを貼ったり、選挙カーを走らせたりできる</td></tr>
+      <tr><td><strong>公職選挙法</strong></td><td>選挙のルールを定めた法律。違反すると候補者だけでなく支援者（私たち）も罰せられる可能性がある</td></tr>
+    </tbody>
+  </table>
+  <div class="warn-box" style="margin-top:18px;"><strong>重要：</strong>選挙違反は「知らなかった」では済みません。SNS部員も罰則の対象になります。</div>
+  <div class="bottom-nav">
+    <button class="nav-arrow" onclick="goTo(0)">← 戻る</button>
+    <button class="nav-arrow" onclick="goTo(2)">次へ：クイックガイド →</button>
+  </div>
+</div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page" id="page-2">
+<div class="container">
+  <p class="section-head">期間別クイックガイド</p>
+  <p class="body-text">投稿前に「今日はどの期間か」を確認して、対応する表を見てください。</p>
+
+  <p style="font-size:14px;font-weight:700;color:#1a1a1a;margin:18px 0 10px;">STEP 1　今日はどの期間？</p>
+  <div class="flow-box" onclick="document.getElementById('guide-a').scrollIntoView({behavior:'smooth'})">
+    <span class="arrow-icon" style="color:#2E75B6;">▶</span>
+    <div><div class="flow-box-label">告示日はまだ来ていない</div><div class="flow-box-desc">→ 下の【STEP 2A　政治活動期間】を見てください</div></div>
+  </div>
+  <div class="flow-box" onclick="document.getElementById('guide-b').scrollIntoView({behavior:'smooth'})">
+    <span class="arrow-icon" style="color:#C00000;">▶</span>
+    <div><div class="flow-box-label">告示日が来た〜投票日の前日</div><div class="flow-box-desc">→ 下の【STEP 2B　選挙運動期間】を見てください</div></div>
+  </div>
+  <div class="flow-box red-box">
+    <span class="arrow-icon" style="color:#C00000;">⚠</span>
+    <div><div class="flow-box-label">今日が投票日</div><div class="flow-box-desc">SNSでの選挙運動は一切禁止！　投稿しないでください</div></div>
+  </div>
+
+  <p id="guide-a" class="section-head green" style="margin-top:28px;">STEP 2A　政治活動期間の注意点</p>
+  <table>
+    <thead><tr><th>チェック項目</th><th class="green">OK / NG</th><th class="green">ひと言メモ</th></tr></thead>
+    <tbody>
+      <tr><td>どのSNSに投稿してもいい？</td><td><span class="badge ok">○ OK</span></td><td>全SNS・全ツール自由に使えます</td></tr>
+      <tr><td>活動報告・演説の様子を投稿する</td><td><span class="badge ok">○ OK</span></td><td>どんどん発信しましょう</td></tr>
+      <tr><td>「シェアしてください」とお願いする</td><td><span class="badge ok">○ OK</span></td><td>拡散依頼もOKです</td></tr>
+      <tr><td>「○○に投票してください」と書く</td><td><span class="badge warn">△ 要注意</span></td><td>選挙運動とみなされる可能性があります</td></tr>
+      <tr><td>他の候補者を批判・中傷する</td><td><span class="badge ng">✕ NG</span></td><td>名誉毀損になる可能性があります</td></tr>
+      <tr><td>うその情報を投稿する</td><td><span class="badge ng">✕ NG</span></td><td>公職選挙法違反・罰則あり</td></tr>
+    </tbody>
+  </table>
+
+  <p id="guide-b" class="section-head red" style="margin-top:28px;">STEP 2B　選挙運動期間の注意点</p>
+  <table>
+    <thead><tr><th>チェック項目</th><th class="red">OK / NG</th><th class="red">ひと言メモ</th></tr></thead>
+    <tbody>
+      <tr><td>X・Facebook・Instagram・TikTok等への投稿</td><td><span class="badge ok">○ OK</span></td><td>投稿・シェア・コメントすべてOK</td></tr>
+      <tr><td>LINEメッセージ・SNSのDM</td><td><span class="badge ok">○ OK</span></td><td>SNSのメッセージ機能は電子メールではないのでOK</td></tr>
+      <tr><td>YouTube・動画配信</td><td><span class="badge ok">○ OK</span></td><td>ライブ配信・録画投稿ともにOK</td></tr>
+      <tr><td>「投票してください」と投稿する</td><td><span class="badge ok">○ OK</span></td><td>選挙運動期間なので直接の投票依頼はOK</td></tr>
+      <tr><td>普通のメール（電子メール）で送る</td><td><span class="badge ng">✕ NG</span></td><td>支援者がメールで選挙運動するのは禁止</td></tr>
+      <tr><td>有料のネット広告を出す</td><td><span class="badge ng">✕ NG</span></td><td>候補者も支援者も全員NG</td></tr>
+      <tr><td>SNS・HPを印刷して配る</td><td><span class="badge ng">✕ NG</span></td><td>プリントアウトして配布するのも禁止</td></tr>
+      <tr><td>18歳未満が選挙運動投稿をする</td><td><span class="badge ng">✕ NG</span></td><td>18歳未満の選挙運動は禁止</td></tr>
+      <tr><td>投票日当日に選挙運動の投稿をする</td><td><span class="badge ng">✕ NG</span></td><td>投票日当日は選挙運動が完全禁止</td></tr>
+    </tbody>
+  </table>
+
+  <p class="section-head" style="margin-top:28px;">STEP 3　投稿前の最終チェック（毎回確認）</p>
+  <table>
+    <thead><tr><th>確認項目</th><th>チェック内容</th></tr></thead>
+    <tbody>
+      <tr><td><strong>事実確認</strong></td><td>投稿する情報は正確ですか？うそや誤解を招く表現はありませんか？</td></tr>
+      <tr><td><strong>複数人確認</strong></td><td>「差別・宗教・政治的に敏感」な内容は、複数の人に確認しましたか？</td></tr>
+      <tr><td><strong>誹謗中傷</strong></td><td>他の候補者や人物を傷つける表現はありませんか？</td></tr>
+      <tr><td><strong>著作権</strong></td><td>使用している写真・BGM・動画に著作権の問題はありませんか？</td></tr>
+      <tr><td><strong>個人情報</strong></td><td>支持者の名前・住所・顔など個人情報が含まれていませんか？</td></tr>
+      <tr><td><strong>感情の状態</strong></td><td>感情的になっていたり、お酒を飲んでいたりしませんか？</td></tr>
+    </tbody>
+  </table>
+  <div class="yellow-box">
+    迷ったら投稿しない！　必ず県連SNS本部長に確認してから投稿する
+    <small>「これって大丈夫かな？」と思ったら、それは確認が必要なサインです</small>
+  </div>
+  <div class="bottom-nav">
+    <button class="nav-arrow" onclick="goTo(1)">← 戻る</button>
+    <button class="nav-arrow" onclick="goTo(3)">次へ：第1章 →</button>
+  </div>
+</div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page" id="page-3">
+<div class="container">
+  <p class="section-head">第1章　SNSの役割と重要性</p>
+  <p class="body-text">SNSは選挙活動においてとても重要なツールです。特に若い世代（18〜49歳）は、新聞よりもインターネットで政治・選挙の情報を得る傾向があります。</p>
+  <table>
+    <thead><tr><th>SNS名</th><th>主なユーザー層</th><th>特徴・活用ポイント</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Facebook</strong></td><td>30〜40代中心</td><td>実名登録が原則。信頼性が高く、地域を絞った広告も出せる。「ネット上の後援会」のイメージで活用</td></tr>
+      <tr><td><strong>X（旧Twitter）</strong></td><td>10〜20代中心</td><td>若い世代へのリーチに有効。匿名ユーザーが多く炎上リスクあり。慎重な運用が必要</td></tr>
+      <tr><td><strong>LINE</strong></td><td>全年齢</td><td>日本人の9,200万人以上が利用。LINE公式アカウントで1対多の発信が可能。選挙期間中も自由に使える</td></tr>
+      <tr><td><strong>Instagram</strong></td><td>10〜30代中心</td><td>写真・動画が中心。ビジュアル重視のコンテンツが効果的</td></tr>
+      <tr><td><strong>TikTok</strong></td><td>10〜30代中心</td><td>ショート動画専用。フォロワー以外にも見てもらいやすい。演説の「切り抜き動画」も効果的</td></tr>
+      <tr><td><strong>YouTube</strong></td><td>全年齢</td><td>長め動画の配信に適している。演説の全編配信や活動記録動画を投稿</td></tr>
+    </tbody>
+  </table>
+  <div class="bottom-nav">
+    <button class="nav-arrow" onclick="goTo(2)">← 戻る</button>
+    <button class="nav-arrow" onclick="goTo(4)">次へ：第2章 →</button>
+  </div>
+</div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page" id="page-4">
+<div class="container">
+  <p class="section-head">第2章　政治活動期間のSNSルール（告示日の前）</p>
+  <p class="body-text">告示日より前の「政治活動期間」は、SNSの利用は原則として自由です。</p>
+  <div class="status-label ok-label">✅ できること</div>
+  <div class="pill-list">
+    <span class="pill ok">どのSNSも自由に使える</span>
+    <span class="pill ok">写真・動画の投稿</span>
+    <span class="pill ok">政策・活動の発信</span>
+    <span class="pill ok">シェア・拡散のお願い</span>
+    <span class="pill ok">コメントへの返信</span>
+    <span class="pill ok">複数SNSと連携投稿</span>
+  </div>
+  <div class="status-label ng-label" style="margin-top:18px;">❌ 注意が必要なこと</div>
+  <div class="pill-list">
+    <span class="pill ng">「投票してください」という直接的な依頼</span>
+    <span class="pill ng">他者の名誉を傷つける投稿</span>
+    <span class="pill ng">虚偽の情報を投稿する</span>
+  </div>
+  <div class="bottom-nav">
+    <button class="nav-arrow" onclick="goTo(3)">← 戻る</button>
+    <button class="nav-arrow" onclick="goTo(5)">次へ：第3章 →</button>
+  </div>
+</div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page" id="page-5">
+<div class="container">
+  <p class="section-head">第3章　選挙運動期間のSNSルール（告示日〜投票日前日）</p>
+  <p class="body-text">選挙運動期間になると、ネット上での選挙運動が解禁されますが、いくつかの重要な制限があります。</p>
+  <div class="info-box"><strong>💡 ポイント：</strong>FacebookのDM・XのDM・LINEのメッセージは「電子メール」ではないので、選挙期間中も自由に使えます！</div>
+  <table>
+    <thead><tr><th>項目</th><th>候補者</th><th>私たち支援者</th></tr></thead>
+    <tbody>
+      <tr><td>ホームページ・ブログの更新</td><td><span class="badge ok">○ OK</span></td><td><span class="badge ok">○ OK</span></td></tr>
+      <tr><td>X・Facebook・Instagram等への投稿</td><td><span class="badge ok">○ OK</span></td><td><span class="badge ok">○ OK</span></td></tr>
+      <tr><td>LINEでのメッセージ発信</td><td><span class="badge ok">○ OK</span></td><td><span class="badge ok">○ OK</span></td></tr>
+      <tr><td>YouTube等での動画配信</td><td><span class="badge ok">○ OK</span></td><td><span class="badge ok">○ OK</span></td></tr>
+      <tr><td>選挙運動用メールの送信</td><td><span class="badge warn">△ 条件あり</span></td><td><span class="badge ng">✕ NG</span></td></tr>
+      <tr><td>有料のネット広告</td><td><span class="badge ng">✕ NG</span></td><td><span class="badge ng">✕ NG</span></td></tr>
+      <tr><td>SNS・HPを印刷して配る</td><td><span class="badge ng">✕ NG</span></td><td><span class="badge ng">✕ NG</span></td></tr>
+    </tbody>
+  </table>
+  <div class="warn-box" style="margin-top:16px;"><strong>絶対NG：</strong>18歳未満の選挙運動 ／ 投票日当日の投稿 ／ 有料広告 ／ 印刷して配布 ／ 電子メールでの運動（支援者）</div>
+  <div class="bottom-nav">
+    <button class="nav-arrow" onclick="goTo(4)">← 戻る</button>
+    <button class="nav-arrow" onclick="goTo(6)">次へ：第4章 →</button>
+  </div>
+</div>
+</div>
+
+<!-- PAGE 6 -->
+<div class="page" id="page-6">
+<div class="container">
+  <p class="section-head">第4章　SNS投稿の基本ルールと注意点</p>
+  <p class="body-text">「炎上」とは、投稿に対して大量の批判・中傷が集まること。一度炎上すると、選挙活動全体に大きなダメージを与えます。</p>
+  <p style="font-size:14px;font-weight:700;color:#1a1a1a;margin:14px 0 10px;">炎上しやすい「さしすせそ」</p>
+  <table>
+    <thead><tr><th style="width:50px;">頭文字</th><th>テーマ</th><th>注意点</th></tr></thead>
+    <tbody>
+      <tr><td style="text-align:center;font-weight:700;color:#C00000;font-size:18px;">さ</td><td>災害・差別</td><td>被災者への配慮が欠けた発言、差別的な表現は絶対NG</td></tr>
+      <tr><td style="text-align:center;font-weight:700;color:#C00000;font-size:18px;">し</td><td>思想・宗教</td><td>特定の宗教・思想への言及は誤解を招きやすい</td></tr>
+      <tr><td style="text-align:center;font-weight:700;color:#C00000;font-size:18px;">す</td><td>スパム・スキャンダル</td><td>他人のスキャンダルへの言及は名誉毀損になる可能性</td></tr>
+      <tr><td style="text-align:center;font-weight:700;color:#C00000;font-size:18px;">せ</td><td>政治・セクシャル</td><td>政治的な過激な発言、性的な表現は厳禁</td></tr>
+      <tr><td style="text-align:center;font-weight:700;color:#C00000;font-size:18px;">そ</td><td>操作ミス（誤投稿）</td><td>酔った状態・感情的な状態での投稿は控える</td></tr>
+    </tbody>
+  </table>
+  <div style="background:#FFF8DC;border-radius:8px;padding:13px 16px;margin:16px 0;font-size:13px;color:#5c3d00;font-weight:700;line-height:1.7;">
+    「差別」「宗教」「セクシャル」な内容を投稿する時は、必ず複数の人に確認してもらってから投稿してください。
+  </div>
+  <p style="font-size:14px;font-weight:700;color:#1a1a1a;margin:18px 0 10px;">炎上してしまったら</p>
+  <div class="step-flow">
+    <div class="step-item"><div class="step-num">1</div><div><div class="step-title">すぐに県連SNS本部長に報告する</div></div></div>
+    <div class="step-item"><div class="step-num">2</div><div><div class="step-title">一人でコメントに返信したり、削除したりしない</div></div></div>
+    <div class="step-item"><div class="step-num">3</div><div><div class="step-title">信頼できる複数の人と一緒に対応を協議する</div></div></div>
+    <div class="step-item"><div class="step-num">4</div><div><div class="step-title">焦らず冷静に。「ミスの上にミスを重ねない」</div></div></div>
+  </div>
+  <div class="bottom-nav">
+    <button class="nav-arrow" onclick="goTo(5)">← 戻る</button>
+    <button class="nav-arrow" onclick="goTo(7)">次へ：第5章 →</button>
+  </div>
+</div>
+</div>
+
+<!-- PAGE 7 -->
+<div class="page" id="page-7">
+<div class="container">
+  <p class="section-head">第5章　各SNSの具体的な使い方</p>
+  <p class="section-head sm">X（旧Twitter）</p>
+  <p class="body-text">炎上リスクが最も高いSNSです。慎重に運用してください。</p>
+  <div class="warn-box">攻撃的なコメントに感情的に反応しない。「多様な意見として参考にする」姿勢を保つことが大切です。</div>
+  <p class="section-head sm">Facebook（フェイスブック）</p>
+  <p class="body-text">実名登録が原則で信頼性が高い。「ネット上の後援会」のイメージで運用しましょう。個人アカウントとFacebookページの2種類があります。</p>
+  <p class="section-head sm">LINE（ライン）</p>
+  <p class="body-text">日本最大の利用者数。選挙期間中も自由に活用できます。LINE公式アカウントで1対多の発信が可能です。</p>
+  <p class="section-head sm">Instagram / TikTok / YouTube</p>
+  <p class="body-text">Instagramはビジュアル重視。TikTokは演説の「切り抜き動画」が効果的。YouTubeは演説の全編配信に適しています。</p>
+  <div class="bottom-nav">
+    <button class="nav-arrow" onclick="goTo(6)">← 戻る</button>
+    <button class="nav-arrow" onclick="goTo(8)">次へ：第6章 →</button>
+  </div>
+</div>
+</div>
+
+<!-- PAGE 8 -->
+<div class="page" id="page-8">
+<div class="container">
+  <p class="section-head">第6章　画像・動画コンテンツ作成の注意点</p>
+  <p style="font-size:14px;font-weight:700;color:#1a1a1a;margin:0 0 10px;">著作権に注意</p>
+  <table>
+    <thead><tr><th>コンテンツの種類</th><th>注意点</th></tr></thead>
+    <tbody>
+      <tr><td><strong>写真・画像</strong></td><td>ネット上の写真を無断で使用しない。著作権フリーの素材サイトを利用する</td></tr>
+      <tr><td><strong>BGM・音楽</strong></td><td>動画のBGMも著作権の対象。著作権フリーの音楽のみ使用する。<br>公式ソングをBGMに使いたい場合は、<strong>県連SNS・動画編集チャットの概要欄</strong>にあります。</td></tr>
+      <tr><td><strong>動画の切り抜き</strong></td><td><span style="color:#C00000;font-weight:700;">公式チャンネルからのもののみOK。</span>他の発信者の動画の切り抜きは禁止。他人の動画や放送内容は無断使用NG</td></tr>
+      <tr><td><strong>ロゴ・キャラクター</strong></td><td>企業ロゴ・アニメキャラクターなどを無断で使用しない</td></tr>
+    </tbody>
+  </table>
+  <div style="background:#1B3F72;border-radius:8px;padding:16px 18px;margin:16px 0;color:#fff;font-size:14px;font-weight:700;line-height:1.8;text-align:center;">SNS部で作成したコンテンツは、公式とみなされます。<br>強い責任感を持ち、皆で確認しながら作成していきましょう。</div>
+  <p style="font-size:14px;font-weight:700;color:#1a1a1a;margin:18px 0 10px;">個人情報の取り扱い</p>
+  <div class="warn-box">支持者の氏名・住所・連絡先などをSNSに投稿しない。写真・動画に写り込んだ人物の顔が特定されるような投稿はしない。後援会名簿などの個人情報をSNSで共有しない。</div>
+  <p style="font-size:14px;font-weight:700;color:#1a1a1a;margin:18px 0 10px;">SNSで使う写真・動画のポイント</p>
+  <div class="pill-list">
+    <span class="pill ok">候補者の顔がはっきりわかる写真</span>
+    <span class="pill ok">明るく清潔感のある画像</span>
+    <span class="pill ok">活動の様子をリアルに伝える写真</span>
+    <span class="pill ok">キャッチフレーズを入れた画像</span>
+    <span class="pill ok">スマホで見やすいサイズ・フォント</span>
+  </div>
+  <div class="bottom-nav">
+    <button class="nav-arrow" onclick="goTo(7)">← 戻る</button>
+    <button class="nav-arrow" onclick="goTo(9)">次へ：第7章 →</button>
+  </div>
+</div>
+</div>
+
+<!-- PAGE 9 -->
+<div class="page" id="page-9">
+<div class="container">
+  <p class="section-head">第7章　投稿内容の確認フロー</p>
+  <p class="body-text">投稿前には必ず以下のフローに従ってください。</p>
+  <div class="step-flow">
+    <div class="step-item"><div class="step-num">1</div><div><div class="step-title">コンテンツを作成する</div><div class="step-desc">担当：SNS部員</div></div></div>
+    <div class="step-item"><div class="step-num">2</div><div><div class="step-title">クイックガイド（STEP 3）でチェックリストを確認する</div><div class="step-desc">担当：SNS部員</div></div></div>
+    <div class="step-item"><div class="step-num">3</div><div><div class="step-title">今が選挙期間中かどうかを確認する</div><div class="step-desc">担当：SNS部員</div></div></div>
+    <div class="step-item"><div class="step-num">4</div><div><div class="step-title">「差別・宗教・政治的に敏感」な内容を含む場合は県連SNS本部長に確認</div><div class="step-desc">担当：SNS部員 → 県連SNS本部長</div></div></div>
+    <div class="step-item"><div class="step-num">5</div><div><div class="step-title">SNS支部投稿チャットに提出して県連SNS本部長・副部長に投稿依頼する</div><div class="step-desc">担当：SNS部員　投稿文（テキスト）と画像・動画をセットで提出。<br>※画像や動画はできたが、投稿文を考えるのに時間がかかる場合、または誰かに頼みたい場合は「県連SNS・画像チャット」に直近の番号をふって提出。</div></div></div>
+    <div class="step-item"><div class="step-num">6</div><div><div class="step-title">投稿する</div><div class="step-desc">担当：県連SNS本部長・県連SNS副本部長</div></div></div>
+    <div class="step-item"><div class="step-num">7</div><div><div class="step-title">反応を確認し、問題があれば即報告</div><div class="step-desc">担当：SNS部員</div></div></div>
+  </div>
+  <div class="yellow-box">
+    迷ったら必ず確認！
+    <small>「これって大丈夫かな？」と思ったら、一人で判断せず必ず県連SNS本部長に相談してください</small>
+  </div>
+  <div class="bottom-nav">
+    <button class="nav-arrow" onclick="goTo(8)">← 戻る</button>
+    <button class="nav-arrow" onclick="goTo(10)">次へ：第8章 →</button>
+  </div>
+</div>
+</div>
+
+<!-- PAGE 10 -->
+<div class="page" id="page-10">
+<div class="container">
+  <p class="section-head">第8章　SNS部 行動指針まとめ</p>
+  <p style="font-size:15px;font-weight:700;color:#1a1a1a;text-align:center;margin:18px 0 16px;">SNS部員として守るべき5つの約束</p>
+  <div class="step-flow">
+    <div class="step-item"><div class="step-num">1</div><div><div class="step-title">事実のみ投稿する</div><div class="step-desc">うそや誤解を招く情報は絶対に投稿しない。確認できない情報は投稿しない</div></div></div>
+    <div class="step-item"><div class="step-num">2</div><div><div class="step-title">迷ったら確認する</div><div class="step-desc">「これって大丈夫?」と思ったら一人で判断せず、必ず県連SNS本部長に確認する</div></div></div>
+    <div class="step-item"><div class="step-num">3</div><div><div class="step-title">炎上テーマを避ける</div><div class="step-desc">「さしすせそ」のテーマには特に慎重に。感情的な状態では投稿しない</div></div></div>
+    <div class="step-item"><div class="step-num">4</div><div><div class="step-title">ルールを守って活動する</div><div class="step-desc">選挙運動期間中は電子メールでの発信や有料広告を使わない</div></div></div>
+    <div class="step-item"><div class="step-num">5</div><div><div class="step-title">問題はすぐ報告する</div><div class="step-desc">炎上・トラブルが起きたら、一人で抱え込まず即座に県連SNS本部長に報告する</div></div></div>
+  </div>
+  <div class="info-box" style="text-align:center;margin-top:24px;font-size:14px;"><strong>わからないことがあれば、いつでも県連SNS本部長に相談してください。</strong></div>
+  <div class="bottom-nav">
+    <button class="nav-arrow" onclick="goTo(9)">← 戻る</button>
+    <button class="nav-arrow" onclick="goTo(0)">🏠 最初に戻る</button>
+  </div>
+</div>
+</div>
+
+<script>
+var pages = document.querySelectorAll('.page');
+var navBtns = document.querySelectorAll('.nav-btn');
+function goTo(idx) {
+  pages.forEach(function(p, i) { p.classList.toggle('active', i === idx); });
+  navBtns.forEach(function(b, i) { b.classList.toggle('active', i === idx); });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
